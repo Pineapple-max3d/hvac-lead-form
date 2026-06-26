@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,25 +8,13 @@
 <style>
 :root {
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --surface-1: #f5f5f7;
-  --surface-2: #ffffff;
-  --border: rgba(0,0,0,0.09);
-  --border-strong: rgba(0,0,0,0.2);
-  --border-accent: #2563eb;
-  --text-primary: #111;
-  --text-secondary: #555;
-  --text-muted: #888;
-  --text-accent: #1d4ed8;
-  --text-success: #15803d;
-  --text-warning: #92400e;
-  --text-pro: #5b21b6;
-  --fill-accent: #2563eb;
-  --on-accent: #fff;
-  --bg-accent: #eff6ff;
-  --bg-success: #f0fdf4;
-  --bg-warning: #fffbeb;
-  --bg-pro: #f5f3ff;
-  --radius: 8px;
+  --surface-1: #f5f5f7; --surface-2: #ffffff;
+  --border: rgba(0,0,0,0.09); --border-strong: rgba(0,0,0,0.2);
+  --border-accent: #2563eb; --text-primary: #111; --text-secondary: #555;
+  --text-muted: #888; --text-accent: #1d4ed8; --text-success: #15803d;
+  --text-warning: #92400e; --text-pro: #5b21b6; --fill-accent: #2563eb;
+  --on-accent: #fff; --bg-accent: #eff6ff; --bg-success: #f0fdf4;
+  --bg-warning: #fffbeb; --bg-pro: #f5f3ff; --radius: 8px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: var(--font-sans); background: var(--surface-1); min-height: 100vh; }
@@ -43,113 +30,227 @@ body { font-family: var(--font-sans); background: var(--surface-1); min-height: 
 .q-title { font-size: 17px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
 .q-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; }
 .options { display: flex; flex-direction: column; gap: 10px; }
-.opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 0.5px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--surface-2); }
+.opt { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 0.5px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--surface-2); }
 .opt:hover { border-color: var(--border-strong); background: var(--surface-1); }
 .opt.selected { border-color: var(--border-accent); background: var(--bg-accent); }
 .opt input[type=radio] { display: none; }
-.opt-icon { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.opt-icon { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; margin-top: 2px; }
 .opt.selected .opt-icon { border-color: var(--fill-accent); background: var(--fill-accent); }
 .opt.selected .opt-icon::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; display: block; }
+.opt-text { display: flex; flex-direction: column; gap: 2px; }
 .opt-label { font-size: 14px; color: var(--text-primary); }
+.opt-label span { color: var(--text-muted); font-weight: 400; }
+.opt-hint { font-size: 12px; color: var(--text-muted); }
 .opt.selected .opt-label { color: var(--text-accent); font-weight: 500; }
 .btn-row { display: flex; justify-content: flex-end; margin-top: 1.5rem; }
 .btn-next { padding: 10px 24px; border-radius: var(--radius); border: none; background: var(--fill-accent); color: var(--on-accent); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.15s; }
 .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
 .btn-next:not(:disabled):hover { opacity: 0.88; }
+.contact-title { font-size: 17px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
+.contact-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.field-row { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0.75rem; }
+.field-label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.field-label .req { color: #dc2626; margin-left: 2px; }
+.field-input { height: 38px; padding: 0 10px; border: 0.5px solid var(--border-strong); border-radius: var(--radius); font-family: var(--font-sans); font-size: 14px; color: var(--text-primary); background: var(--surface-2); outline: none; transition: border-color 0.15s; width: 100%; }
+.field-input:focus { border-color: var(--border-accent); }
+.field-input.error { border-color: #dc2626; }
+.field-error { font-size: 11px; color: #dc2626; display: none; margin-top: 2px; }
+.field-divider { border: none; border-top: 0.5px solid var(--border); margin: 0.75rem 0 1rem; }
+.loader-overlay { position: fixed; inset: 0; z-index: 999; background: rgba(255,255,255,0.96); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.loader-overlay.active { opacity: 1; pointer-events: all; }
+.loader-ring { width: 72px; height: 72px; position: relative; }
+.loader-ring svg { width: 72px; height: 72px; animation: spin 1.2s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-ring-track { fill: none; stroke: #e8eaf0; stroke-width: 5; }
+.loader-ring-fill { fill: none; stroke: var(--fill-accent); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 120; stroke-dashoffset: 40; }
+.loader-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.loader-icon i { font-size: 26px; color: var(--fill-accent); }
+.loader-title { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.3rem; text-align: center; }
+.loader-sub { font-size: 13px; color: var(--text-muted); min-height: 20px; transition: opacity 0.3s; text-align: center; }
+.loader-dots { display: inline-flex; gap: 5px; margin-top: 1rem; }
+.loader-dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--fill-accent); opacity: 0.3; animation: dotpulse 1.2s ease-in-out infinite; }
+.loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotpulse { 0%,80%,100%{ opacity:0.3; transform:scale(1); } 40%{ opacity:1; transform:scale(1.3); } }
 .exit-card { text-align: center; padding: 2.5rem 1.5rem; }
 .exit-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--surface-1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
 .exit-icon i { font-size: 24px; color: var(--text-muted); }
 .exit-title { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
 .exit-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 .success-card { text-align: center; padding: 2.5rem 1.5rem; }
-.success-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--bg-success); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
-.success-icon i { font-size: 24px; color: var(--text-success); }
+.success-icon { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.success-icon.full { background: var(--bg-success); }
+.success-icon.full i { font-size: 24px; color: var(--text-success); }
+.success-icon.partial { background: var(--bg-warning); }
+.success-icon.partial i { font-size: 24px; color: var(--text-warning); }
 .success-title { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
 .success-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 .tier-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 1rem; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-.tier-1 { background: var(--bg-success); color: var(--text-success); }
-.tier-2 { background: var(--bg-accent); color: var(--text-accent); }
-.tier-3 { background: var(--bg-warning); color: var(--text-warning); }
-.tier-onboard { background: var(--bg-pro); color: var(--text-pro); }
+.tier-full { background: var(--bg-success); color: var(--text-success); }
+.tier-partial { background: var(--bg-warning); color: var(--text-warning); }
+.tier-pro { background: var(--bg-pro); color: var(--text-pro); }
+.tier-accent { background: var(--bg-accent); color: var(--text-accent); }
 </style>
 </head>
 <body>
+<div class="loader-overlay" id="loader-overlay">
+  <div class="loader-ring">
+    <svg viewBox="0 0 72 72">
+      <circle class="loader-ring-track" cx="36" cy="36" r="30"/>
+      <circle class="loader-ring-fill" cx="36" cy="36" r="30"/>
+    </svg>
+    <div class="loader-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+  </div>
+  <div>
+    <div class="loader-title">Qualifying your application</div>
+    <div class="loader-sub" id="loader-sub">Checking your details…</div>
+    <div class="loader-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
 <div class="form-wrap">
   <div class="logo-bar">
     <div class="logo-circle"><i class="ti ti-flame" aria-hidden="true"></i></div>
     <span class="brand-name">Alliance HVAC — Contractor Partnership</span>
   </div>
-  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:14%"></div></div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:12%"></div></div>
   <div id="form-area"></div>
 </div>
 <script>
 const steps = [
-  { id:'q1', title:'How long has your company been registered in Ontario?', sub:'We partner with established contractors only.', options:[{label:'Less than 2 years',value:'lt2',exit:true},{label:'2–5 years',value:'2to5'},{label:'5 years+',value:'5plus',priority:true}] },
-  { id:'q2', title:'Are you currently looking for more installation work?', sub:'We have installs ready to assign this week.', options:[{label:'Yes, I have availability now',value:'yes_now',priority:true},{label:"I'm at capacity but open to discussing",value:'open'},{label:'No',value:'no',exit:true}] },
-  { id:'q3', title:'Are you licensed and insured for HVAC installs in Ontario?', sub:'TSSA certification and liability insurance required.', options:[{label:'Yes, fully licensed and insured',value:'yes'},{label:'No',value:'no',exit:true}] },
-  { id:'q4', title:'How quickly can you mobilize for a job?', sub:'Equipment is prepped — we need fast turnaround.', options:[{label:'Same day',value:'same',priority:true},{label:'Within 48 hours',value:'48h'},{label:'Within a week',value:'week'}] },
-  { id:'q5', title:'How many installs can your team take on per week?', sub:'We scale volume based on your capacity.', options:[{label:'1–2',value:'1to2'},{label:'3–5',value:'3to5'},{label:'5+',value:'5plus',priority:true}] },
-  { id:'q6', title:'Do you currently offer financing to your customers?', sub:'Most of our installs are financed.', options:[{label:'Yes',value:'yes',next:'q7'},{label:'Open to it',value:'open',next:'q7'},{label:'No',value:'no',next:'q7b'}] },
-  { id:'q7', title:'Who is your current financing partner?', sub:'This helps us match you to the right job pipeline.', options:[{label:'Financeit / Snap',value:'financeit',tier:1},{label:'UEI',value:'uei',tier:2},{label:'VaultPay',value:'vaultpay',tier:3},{label:'Other (Vista, Comfortowl, etc.)',value:'other',tier:4}] },
-  { id:'q7b', title:'We provide 5+ installs per week to our partners.', sub:'Would you be open to registering for a financing platform to work with us?', options:[{label:"Yes, I'm open to it",value:'yes_onboard'},{label:'No, not interested',value:'no',exit:true}] }
+  { id:'q1', title:'How long has your company been registered in Ontario?', sub:'We partner with established contractors only.', options:[{label:'Less than 2 years',value:'lt2',exit:true},{label:'2–5 years',value:'2to5'},{label:'5 years+',value:'5plus'}] },
+  { id:'q2', title:'Are you open to next day availability for installs?', sub:'We assign jobs fast — contractors who move quickly get priority volume.', options:[{label:'Yes, I can do next day',hint:'24hrs – 48hrs',value:'yes_now'},{label:'I usually need a few days notice',hint:'2–5 days',value:'open'},{label:'No, my schedule is full',hint:'10–15 days',value:'no',partial:true}] },
+  { id:'q3', title:'Are you licensed for HVAC installs in Ontario?', sub:'TSSA certification is required to work with us.', options:[{label:'Yes, I am TSSA licensed',value:'yes'},{label:'No',value:'no',exit:true}] },
+  { id:'q3b', title:'What areas of the GTA can you service?', sub:'Select the region where your crew operates.', options:[{label:'North GTA',hint:'Barrie, Newmarket, Aurora',value:'north'},{label:'East GTA',hint:'Oshawa, Whitby, Pickering',value:'east'},{label:'West GTA',hint:'Mississauga, Brampton, Oakville',value:'west'},{label:'South GTA',hint:'Hamilton, Niagara Falls, Burlington',value:'south'},{label:'Central GTA',hint:'Toronto, North York, Scarborough',value:'central'},{label:'Anywhere in GTA — willing to travel',value:'anywhere'}] },
+  { id:'q4', title:'How many installs can your team take on per week?', sub:'We scale volume based on your capacity.', options:[{label:'1–2',value:'1to2'},{label:'3–5',value:'3to5'},{label:'5+',value:'5plus'}] },
+  { id:'q5', title:'Do you currently offer financing to your customers?', sub:'Most of our installs are financed.', options:[{label:'Yes',value:'yes',next:'q6'},{label:'Open to it',value:'open',next:'q6'},{label:'No',value:'no',next:'q6b'}] },
+  { id:'q6', title:'Who is your current financing partner?', sub:'This helps us match you to the right job pipeline.', options:[{label:'Financeit / Snap',value:'financeit'},{label:'UEI',value:'uei'},{label:'VaultPay',value:'vaultpay'},{label:'Other (Vista, Comfortowl, etc.)',value:'other'}] },
+  { id:'q6b', title:'We provide 5+ installs per week to our partners.', sub:'Would you be open to registering for a financing platform to work with us?', options:[{label:"Yes, I'm open to it",value:'yes_onboard'},{label:'No, not interested',value:'no',exit:true}] }
 ];
 const stepMap = {};
 steps.forEach(s => stepMap[s.id] = s);
-const stepOrder = ['q1','q2','q3','q4','q5','q6'];
-let currentStepId = 'q1', answers = {}, selected = null, history = [];
+const stepOrder = ['q1','q2','q3','q3b','q4','q5'];
+let currentStepId = 'q1', answers = {}, selected = null, history = [], isPartial = false;
 
-function getProgress(id) { return {q1:14,q2:28,q3:42,q4:57,q5:71,q6:85,q7:100,q7b:100}[id]||14; }
-function getTier(ans) {
-  if(ans.q7==='financeit') return 1; if(ans.q7==='uei') return 2;
-  if(ans.q7==='vaultpay') return 3; if(ans.q7==='other') return 4;
-  if(ans.q7b==='yes_onboard') return 'onboard'; return null;
-}
+function getProgress(id) { return {q1:12,q2:24,q3:36,q3b:48,q4:60,q5:72,q6:84,q6b:84,contact:95}[id]||12; }
+
 function renderStep(stepId) {
   selected = null;
   const step = stepMap[stepId];
   document.getElementById('prog').style.width = getProgress(stepId)+'%';
   document.getElementById('form-area').innerHTML = `
     <div class="card">
-      <div class="step-label">Question ${history.length+1} of 7</div>
+      <div class="step-label">Question ${history.length+1} of 8</div>
       <div class="q-title">${step.title}</div>
       <div class="q-sub">${step.sub}</div>
       <div class="options">${step.options.map(o=>`
-        <label class="opt" data-val="${o.value}" onclick="selectOpt(this,'${o.value}')">
+        <label class="opt" onclick="selectOpt(this,'${o.value}')">
           <input type="radio" name="opt" value="${o.value}">
           <div class="opt-icon"></div>
-          <span class="opt-label">${o.label}</span>
+          <div class="opt-text">
+            <div class="opt-label">${o.label}${o.hint?` <span>(${o.hint})</span>`:''}</div>
+          </div>
         </label>`).join('')}
       </div>
-      <div class="btn-row"><button class="btn-next" id="btn-next" disabled onclick="nextStep()">Continue <i class="ti ti-arrow-right"></i></button></div>
+      <div class="btn-row"><button class="btn-next" id="btn-next" disabled onclick="nextStep()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>
     </div>`;
 }
+
 function selectOpt(el, val) {
-  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected'); selected = val;
   document.getElementById('btn-next').disabled = false;
 }
+
 function nextStep() {
-  if(!selected) return;
+  if (!selected) return;
   const step = stepMap[currentStepId];
   answers[currentStepId] = selected;
-  const opt = step.options.find(o=>o.value===selected);
-  if(opt&&opt.exit){ showExit(); return; }
+  const opt = step.options.find(o => o.value === selected);
+  if (opt && opt.exit) { showExit(); return; }
+  if (opt && opt.partial) { isPartial = true; }
   history.push(currentStepId);
-  if(currentStepId==='q6'){ currentStepId=(selected==='no')?'q7b':'q7'; renderStep(currentStepId); return; }
-  if(currentStepId==='q7'||currentStepId==='q7b'){ showSuccess(); return; }
+  if (currentStepId === 'q5') { currentStepId = (selected === 'no') ? 'q6b' : 'q6'; renderStep(currentStepId); return; }
+  if (currentStepId === 'q6' || currentStepId === 'q6b') { showContactForm(); return; }
   const idx = stepOrder.indexOf(currentStepId);
-  if(idx < stepOrder.length-1){ currentStepId=stepOrder[idx+1]; renderStep(currentStepId); } else { showSuccess(); }
+  if (idx < stepOrder.length - 1) { currentStepId = stepOrder[idx + 1]; renderStep(currentStepId); } else { showContactForm(); }
 }
+
+function showContactForm() {
+  document.getElementById('prog').style.width = getProgress('contact')+'%';
+  document.getElementById('form-area').innerHTML = `
+    <div class="card">
+      <div class="contact-title">Almost there — your details</div>
+      <div class="contact-sub">We'll use this to match you with jobs in your area and reach out directly.</div>
+      <div class="field-grid">
+        <div class="field-row"><label class="field-label">First name<span class="req">*</span></label><input class="field-input" id="f-first" type="text" placeholder="John" autocomplete="given-name"><div class="field-error" id="e-first">Required</div></div>
+        <div class="field-row"><label class="field-label">Last name<span class="req">*</span></label><input class="field-input" id="f-last" type="text" placeholder="Smith" autocomplete="family-name"><div class="field-error" id="e-last">Required</div></div>
+      </div>
+      <div class="field-row"><label class="field-label">Phone number<span class="req">*</span></label><input class="field-input" id="f-phone" type="tel" placeholder="416-555-0100" autocomplete="tel"><div class="field-error" id="e-phone">Enter a valid phone number</div></div>
+      <div class="field-row"><label class="field-label">Email<span class="req">*</span></label><input class="field-input" id="f-email" type="email" placeholder="john@yourcompany.com" autocomplete="email"><div class="field-error" id="e-email">Enter a valid email address</div></div>
+      <hr class="field-divider">
+      <div class="field-row"><label class="field-label">Business name</label><input class="field-input" id="f-biz" type="text" placeholder="Smith HVAC Ltd." autocomplete="organization"></div>
+      <div class="field-row"><label class="field-label">Website</label><input class="field-input" id="f-web" type="url" placeholder="https://yoursite.com"></div>
+      <div class="field-row"><label class="field-label">Street address</label><input class="field-input" id="f-addr" type="text" placeholder="123 Main St, Toronto, ON" autocomplete="street-address"></div>
+      <div class="btn-row"><button class="btn-next" onclick="submitContact()">Submit application <i class="ti ti-send" aria-hidden="true"></i></button></div>
+    </div>`;
+}
+
+function submitContact() {
+  let valid = true;
+  const checks = [
+    {id:'f-first', err:'e-first', test: v => v.trim().length > 0},
+    {id:'f-last',  err:'e-last',  test: v => v.trim().length > 0},
+    {id:'f-phone', err:'e-phone', test: v => /^\+?[\d\s\-().]{7,}$/.test(v.trim())},
+    {id:'f-email', err:'e-email', test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())}
+  ];
+  checks.forEach(c => {
+    const el = document.getElementById(c.id);
+    el.classList.remove('error');
+    document.getElementById(c.err).style.display = 'none';
+    if (!c.test(el.value)) { el.classList.add('error'); document.getElementById(c.err).style.display = 'block'; valid = false; }
+  });
+  if (!valid) return;
+  answers.contact = { first: document.getElementById('f-first').value.trim(), last: document.getElementById('f-last').value.trim(), phone: document.getElementById('f-phone').value.trim(), email: document.getElementById('f-email').value.trim(), biz: document.getElementById('f-biz').value.trim(), web: document.getElementById('f-web').value.trim(), addr: document.getElementById('f-addr').value.trim() };
+  runLoader();
+}
+
+function runLoader() {
+  const overlay = document.getElementById('loader-overlay');
+  const subEl = document.getElementById('loader-sub');
+  const messages = ['Checking your details…','Verifying service area…','Reviewing availability…','Matching with open installs…','Finalising your profile…'];
+  let idx = 0;
+  overlay.classList.add('active');
+  const interval = setInterval(() => {
+    idx++;
+    if (idx < messages.length) {
+      subEl.style.opacity = '0';
+      setTimeout(() => { subEl.textContent = messages[idx]; subEl.style.opacity = '1'; }, 200);
+    }
+  }, 700);
+  setTimeout(() => { clearInterval(interval); overlay.classList.remove('active'); showSuccess(); }, 3500);
+}
+
 function showExit() {
-  document.getElementById('prog').style.width='100%';
-  document.getElementById('form-area').innerHTML=`<div class="card exit-card"><div class="exit-icon"><i class="ti ti-clock"></i></div><div class="exit-title">Thanks for your interest!</div><div class="exit-body">We currently partner with companies with 2+ years of experience in Ontario. Keep growing and we'd love to work with you in the future.</div></div>`;
+  document.getElementById('prog').style.width = '100%';
+  document.getElementById('form-area').innerHTML = `<div class="card exit-card"><div class="exit-icon"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="exit-title">Thanks for your interest!</div><div class="exit-body">We currently partner with companies with 2+ years of experience in Ontario who are TSSA licensed. Keep growing and we'd love to work with you in the future.</div></div>`;
 }
+
 function showSuccess() {
-  document.getElementById('prog').style.width='100%';
-  const tier = getTier(answers);
-  const badge = tier===1?'<div class="tier-badge tier-1"><i class="ti ti-star"></i> Tier 1 — Financeit verified</div>':tier===2?'<div class="tier-badge tier-2"><i class="ti ti-circle-check"></i> Tier 2 — UEI partner</div>':tier===3?'<div class="tier-badge tier-3"><i class="ti ti-circle-check"></i> Tier 3 — VaultPay partner</div>':tier==='onboard'?'<div class="tier-badge tier-onboard"><i class="ti ti-rocket"></i> Financing onboarding pipeline</div>':'<div class="tier-badge tier-2"><i class="ti ti-circle-check"></i> Qualified — other platform</div>';
-  document.getElementById('form-area').innerHTML=`<div class="card success-card"><div class="success-icon"><i class="ti ti-circle-check"></i></div><div class="success-title">You're in — Zack will call you shortly</div><div class="success-body">We have installs lined up in your area. Equipment is ready, we just need a licensed local crew. Expect a call from Alliance HVAC within 24 hours.</div>${badge}</div>`;
+  document.getElementById('prog').style.width = '100%';
+  const fin = answers.q6;
+  let badge = '';
+  if (isPartial) { badge = '<div class="tier-badge tier-partial"><i class="ti ti-clock" aria-hidden="true"></i> Partially qualified — limited availability</div>'; }
+  else if (fin === 'financeit') { badge = '<div class="tier-badge tier-full"><i class="ti ti-star" aria-hidden="true"></i> Tier 1 — Financeit verified</div>'; }
+  else if (fin === 'uei') { badge = '<div class="tier-badge tier-accent"><i class="ti ti-circle-check" aria-hidden="true"></i> Tier 2 — UEI partner</div>'; }
+  else if (fin === 'vaultpay') { badge = '<div class="tier-badge tier-partial"><i class="ti ti-circle-check" aria-hidden="true"></i> Tier 3 — VaultPay partner</div>'; }
+  else if (answers.q6b === 'yes_onboard') { badge = '<div class="tier-badge tier-pro"><i class="ti ti-rocket" aria-hidden="true"></i> Financing onboarding pipeline</div>'; }
+  else { badge = '<div class="tier-badge tier-accent"><i class="ti ti-circle-check" aria-hidden="true"></i> Qualified — other platform</div>'; }
+  const iconClass = isPartial ? 'partial' : 'full';
+  const iconName = isPartial ? 'ti-clock' : 'ti-circle-check';
+  document.getElementById('form-area').innerHTML = `<div class="card success-card"><div class="success-icon ${iconClass}"><i class="ti ${iconName}" aria-hidden="true"></i></div><div class="success-title">You're in — Zack will call you shortly</div><div class="success-body">We have installs lined up in your area. Equipment is ready, we just need a licensed local crew. Expect a call from Alliance HVAC within 24 hours.</div>${badge}</div>`;
 }
+
 renderStep('q1');
 </script>
 </body>
