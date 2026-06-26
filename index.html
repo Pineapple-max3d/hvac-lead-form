@@ -1,1 +1,156 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alliance HVAC — Contractor Partnership</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --surface-1: #f5f5f7;
+  --surface-2: #ffffff;
+  --border: rgba(0,0,0,0.09);
+  --border-strong: rgba(0,0,0,0.2);
+  --border-accent: #2563eb;
+  --text-primary: #111;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --text-accent: #1d4ed8;
+  --text-success: #15803d;
+  --text-warning: #92400e;
+  --text-pro: #5b21b6;
+  --fill-accent: #2563eb;
+  --on-accent: #fff;
+  --bg-accent: #eff6ff;
+  --bg-success: #f0fdf4;
+  --bg-warning: #fffbeb;
+  --bg-pro: #f5f3ff;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); background: var(--surface-1); min-height: 100vh; }
+.form-wrap { max-width: 560px; margin: 0 auto; padding: 2rem 1rem; }
+.logo-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 2rem; }
+.logo-circle { width: 38px; height: 38px; border-radius: 50%; background: var(--fill-accent); display: flex; align-items: center; justify-content: center; }
+.logo-circle i { color: var(--on-accent); font-size: 18px; }
+.brand-name { font-size: 16px; font-weight: 500; color: var(--text-primary); }
+.card { background: var(--surface-2); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+.progress-bar { height: 4px; background: var(--surface-1); border-radius: 2px; margin-bottom: 2rem; overflow: hidden; border: 0.5px solid var(--border); }
+.progress-fill { height: 100%; background: var(--fill-accent); border-radius: 2px; transition: width 0.3s ease; }
+.step-label { font-size: 12px; color: var(--text-muted); margin-bottom: 0.5rem; }
+.q-title { font-size: 17px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
+.q-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 1.25rem; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 0.5px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.15s, background 0.15s; background: var(--surface-2); }
+.opt:hover { border-color: var(--border-strong); background: var(--surface-1); }
+.opt.selected { border-color: var(--border-accent); background: var(--bg-accent); }
+.opt input[type=radio] { display: none; }
+.opt-icon { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border-strong); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.opt.selected .opt-icon { border-color: var(--fill-accent); background: var(--fill-accent); }
+.opt.selected .opt-icon::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; display: block; }
+.opt-label { font-size: 14px; color: var(--text-primary); }
+.opt.selected .opt-label { color: var(--text-accent); font-weight: 500; }
+.btn-row { display: flex; justify-content: flex-end; margin-top: 1.5rem; }
+.btn-next { padding: 10px 24px; border-radius: var(--radius); border: none; background: var(--fill-accent); color: var(--on-accent); font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.15s; }
+.btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+.btn-next:not(:disabled):hover { opacity: 0.88; }
+.exit-card { text-align: center; padding: 2.5rem 1.5rem; }
+.exit-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--surface-1); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.exit-icon i { font-size: 24px; color: var(--text-muted); }
+.exit-title { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
+.exit-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.success-card { text-align: center; padding: 2.5rem 1.5rem; }
+.success-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--bg-success); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+.success-icon i { font-size: 24px; color: var(--text-success); }
+.success-title { font-size: 18px; font-weight: 500; color: var(--text-primary); margin-bottom: 0.5rem; }
+.success-body { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.tier-badge { display: inline-flex; align-items: center; gap: 5px; margin-top: 1rem; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.tier-1 { background: var(--bg-success); color: var(--text-success); }
+.tier-2 { background: var(--bg-accent); color: var(--text-accent); }
+.tier-3 { background: var(--bg-warning); color: var(--text-warning); }
+.tier-onboard { background: var(--bg-pro); color: var(--text-pro); }
+</style>
+</head>
+<body>
+<div class="form-wrap">
+  <div class="logo-bar">
+    <div class="logo-circle"><i class="ti ti-flame" aria-hidden="true"></i></div>
+    <span class="brand-name">Alliance HVAC — Contractor Partnership</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:14%"></div></div>
+  <div id="form-area"></div>
+</div>
+<script>
+const steps = [
+  { id:'q1', title:'How long has your company been registered in Ontario?', sub:'We partner with established contractors only.', options:[{label:'Less than 2 years',value:'lt2',exit:true},{label:'2–5 years',value:'2to5'},{label:'5 years+',value:'5plus',priority:true}] },
+  { id:'q2', title:'Are you currently looking for more installation work?', sub:'We have installs ready to assign this week.', options:[{label:'Yes, I have availability now',value:'yes_now',priority:true},{label:"I'm at capacity but open to discussing",value:'open'},{label:'No',value:'no',exit:true}] },
+  { id:'q3', title:'Are you licensed and insured for HVAC installs in Ontario?', sub:'TSSA certification and liability insurance required.', options:[{label:'Yes, fully licensed and insured',value:'yes'},{label:'No',value:'no',exit:true}] },
+  { id:'q4', title:'How quickly can you mobilize for a job?', sub:'Equipment is prepped — we need fast turnaround.', options:[{label:'Same day',value:'same',priority:true},{label:'Within 48 hours',value:'48h'},{label:'Within a week',value:'week'}] },
+  { id:'q5', title:'How many installs can your team take on per week?', sub:'We scale volume based on your capacity.', options:[{label:'1–2',value:'1to2'},{label:'3–5',value:'3to5'},{label:'5+',value:'5plus',priority:true}] },
+  { id:'q6', title:'Do you currently offer financing to your customers?', sub:'Most of our installs are financed.', options:[{label:'Yes',value:'yes',next:'q7'},{label:'Open to it',value:'open',next:'q7'},{label:'No',value:'no',next:'q7b'}] },
+  { id:'q7', title:'Who is your current financing partner?', sub:'This helps us match you to the right job pipeline.', options:[{label:'Financeit / Snap',value:'financeit',tier:1},{label:'UEI',value:'uei',tier:2},{label:'VaultPay',value:'vaultpay',tier:3},{label:'Other (Vista, Comfortowl, etc.)',value:'other',tier:4}] },
+  { id:'q7b', title:'We provide 5+ installs per week to our partners.', sub:'Would you be open to registering for a financing platform to work with us?', options:[{label:"Yes, I'm open to it",value:'yes_onboard'},{label:'No, not interested',value:'no',exit:true}] }
+];
+const stepMap = {};
+steps.forEach(s => stepMap[s.id] = s);
+const stepOrder = ['q1','q2','q3','q4','q5','q6'];
+let currentStepId = 'q1', answers = {}, selected = null, history = [];
+
+function getProgress(id) { return {q1:14,q2:28,q3:42,q4:57,q5:71,q6:85,q7:100,q7b:100}[id]||14; }
+function getTier(ans) {
+  if(ans.q7==='financeit') return 1; if(ans.q7==='uei') return 2;
+  if(ans.q7==='vaultpay') return 3; if(ans.q7==='other') return 4;
+  if(ans.q7b==='yes_onboard') return 'onboard'; return null;
+}
+function renderStep(stepId) {
+  selected = null;
+  const step = stepMap[stepId];
+  document.getElementById('prog').style.width = getProgress(stepId)+'%';
+  document.getElementById('form-area').innerHTML = `
+    <div class="card">
+      <div class="step-label">Question ${history.length+1} of 7</div>
+      <div class="q-title">${step.title}</div>
+      <div class="q-sub">${step.sub}</div>
+      <div class="options">${step.options.map(o=>`
+        <label class="opt" data-val="${o.value}" onclick="selectOpt(this,'${o.value}')">
+          <input type="radio" name="opt" value="${o.value}">
+          <div class="opt-icon"></div>
+          <span class="opt-label">${o.label}</span>
+        </label>`).join('')}
+      </div>
+      <div class="btn-row"><button class="btn-next" id="btn-next" disabled onclick="nextStep()">Continue <i class="ti ti-arrow-right"></i></button></div>
+    </div>`;
+}
+function selectOpt(el, val) {
+  document.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected'); selected = val;
+  document.getElementById('btn-next').disabled = false;
+}
+function nextStep() {
+  if(!selected) return;
+  const step = stepMap[currentStepId];
+  answers[currentStepId] = selected;
+  const opt = step.options.find(o=>o.value===selected);
+  if(opt&&opt.exit){ showExit(); return; }
+  history.push(currentStepId);
+  if(currentStepId==='q6'){ currentStepId=(selected==='no')?'q7b':'q7'; renderStep(currentStepId); return; }
+  if(currentStepId==='q7'||currentStepId==='q7b'){ showSuccess(); return; }
+  const idx = stepOrder.indexOf(currentStepId);
+  if(idx < stepOrder.length-1){ currentStepId=stepOrder[idx+1]; renderStep(currentStepId); } else { showSuccess(); }
+}
+function showExit() {
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('form-area').innerHTML=`<div class="card exit-card"><div class="exit-icon"><i class="ti ti-clock"></i></div><div class="exit-title">Thanks for your interest!</div><div class="exit-body">We currently partner with companies with 2+ years of experience in Ontario. Keep growing and we'd love to work with you in the future.</div></div>`;
+}
+function showSuccess() {
+  document.getElementById('prog').style.width='100%';
+  const tier = getTier(answers);
+  const badge = tier===1?'<div class="tier-badge tier-1"><i class="ti ti-star"></i> Tier 1 — Financeit verified</div>':tier===2?'<div class="tier-badge tier-2"><i class="ti ti-circle-check"></i> Tier 2 — UEI partner</div>':tier===3?'<div class="tier-badge tier-3"><i class="ti ti-circle-check"></i> Tier 3 — VaultPay partner</div>':tier==='onboard'?'<div class="tier-badge tier-onboard"><i class="ti ti-rocket"></i> Financing onboarding pipeline</div>':'<div class="tier-badge tier-2"><i class="ti ti-circle-check"></i> Qualified — other platform</div>';
+  document.getElementById('form-area').innerHTML=`<div class="card success-card"><div class="success-icon"><i class="ti ti-circle-check"></i></div><div class="success-title">You're in — Zack will call you shortly</div><div class="success-body">We have installs lined up in your area. Equipment is ready, we just need a licensed local crew. Expect a call from Alliance HVAC within 24 hours.</div>${badge}</div>`;
+}
+renderStep('q1');
+</script>
+</body>
+</html>
